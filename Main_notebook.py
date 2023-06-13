@@ -1,11 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
-Lets start with importing some stuff.
+#Lets start with importing some stuff.
 # In[132]:
 
-
-import subprocess
-import csv
 import re
 import os
 from os import listdir
@@ -13,55 +10,14 @@ from os.path import isfile, join
 
 import numpy as np
 import pandas as pd
-from sklearn.datasets import load_files  # efficiently load files
 
-try:
-    import tensorflow as tf
-except:
-    print("No tensorflow installed, make sure you have it installled!")
-
-try:
-    from keras.layers import Input, Conv2D, MaxPooling2D, Dense, GlobalAveragePooling2D, Dropout
-    from keras.layers import Activation, Flatten
-    from keras.models import  Sequential
-    from keras import Model, optimizers
-except:
-    print("No keras installed, installing keras right now")
-    subprocess.call(['pip', 'install', "keras"])
-    from keras.layers import Input, Conv2D, MaxPooling2D, Dense, GlobalAveragePooling2D, Dropout
-    from keras.layers import Activation, Flatten
-    from keras.models import  Sequential
-    from keras import Model, optimizers
-
-try:
-    from tensorflow.keras.applications.resnet50 import ResNet50
-except:
-    print("No keras.applications installed, installing keras.applications right now")
-    subprocess.call(['pip', 'install', "keras_applications"])
-    from tensorflow.keras.applications.resnet50 import ResNet50
-
-try:
-    import seaborn as sns
-except:
-    print("No seaborn installed, installing seaborn right now")
-    subprocess.call(['pip', 'install', "seaborn"])
-    import seaborn as sns
-
-from keras.preprocessing import image  # for image preprocessing
-import matplotlib.pyplot as plt # for visualization
-try:
-    import plotly.express as px
-    import plotly.graph_objects as go
-    from plotly.subplots import make_subplots
-except:
-    print("No plotly installed, installing plotly right now")
-    subprocess.call(['pip', 'install', "plotly"])
-    import plotly.express as px
-    import plotly.graph_objects as go
-    from plotly.subplots import make_subplots
+from keras import applications
+from keras import optimizers
+import tensorflow.keras as K
 
 from PIL import Image
-print("Everything imported OK")
+
+K.utils.set_random_seed(270219)
 
 
 # We will start with two functions: One to get the ID of each image and one to find the index of each image of the training set. In this function, we have some folder named data containing the images and the csv file. We store all the images in the variable images, the IDs are the IDs of the images (the number after img_) and labels contain the id with the respective labels. trainIndex then is the images ID that correspond to the labels.csv.
